@@ -1,53 +1,59 @@
-📧 Ubuntu Email Configuration Script
-This script is designed to simplify the setup of email-related services on your Ubuntu system. It's an adaptation inspired by Derek Sivers' script. Let's get your email up and running effortlessly!
+# 📧 Ubuntu Email Configuration Script
 
-🚀 Quick Start
-Run as Root:
+This script simplifies the setup of email-related services on your Ubuntu system. It's inspired by [Derek Sivers' script](https://sive.rs/ti). Let's get your email up and running effortlessly!
 
-bash
-Copy code
-sudo ./ubuntu_email_config.sh
-Follow the Prompts:
+## 🚀 Quick Start
 
-Enter the required information as prompted.
-Sit Back and Relax:
+1. **Run as Root:**
+   ```bash
+   sudo ./ubuntu_email_config.sh
 
-The script will handle the initial setup, download essential configuration files, and guide you through the setup.
-Reboot:
+## Follow the Prompts:
 
-Once done, reboot your system to apply the changes.
-🧰 Prerequisites
-Ubuntu system
-Root access (sudo privileges)
-📥 Configuration Files
+1. **Enter the required information as prompted.**
+
+## Sit Back and Relax:
+
+- The script will handle the initial setup, download essential configuration files, and guide you through the setup.
+
+## Reboot:
+
+- Once done, reboot your system to apply the changes.
+
+## 🧰 Prerequisites
+- Ubuntu system
+- Root access (sudo privileges)
+
+## 📥 Configuration Files
 The script will download the following configuration files:
 
-httpd.conf: HTTP server configuration
-relayd.conf: Relay daemon configuration
-acme-client.conf: ACME client configuration for Let's Encrypt
-.muttrc: Mutt email client configuration
-.mailcap: Mailcap configuration for MIME types
-dovecot.conf: Dovecot IMAP and POP3 server configuration
-Note: If pf.conf is found, it will be moved to /etc/pf.conf, which may not be relevant for Ubuntu.
+1. `httpd.conf`: HTTP server configuration
+2. `relayd.conf`: Relay daemon configuration
+3. `acme-client.conf`: ACME client configuration for Let's Encrypt
+4. `.muttrc`: Mutt email client configuration
+5. `.mailcap`: Mailcap configuration for MIME types
+6. `dovecot.conf`: Dovecot IMAP and POP3 server configuration
 
-🌐 Domain Setup
-Domain Name:
+**Note:** If `pf.conf` is found, it will be moved to `/etc/pf.conf`, which may not be relevant for Ubuntu.
 
-Enter your domain name when prompted.
-Username:
+## 🌐 Domain Setup
+1. **Domain Name:**
+   - Enter your domain name when prompted.
 
-Provide a lowercase username with no spaces.
-Verify Email and Login:
+2. **Username:**
+   - Provide a lowercase username with no spaces.
 
-Confirm that the displayed email and login details are correct.
-🔧 Additional Configurations
-The script also configures:
+3. **Verify Email and Login:**
+   - Confirm that the displayed email and login details are correct.
 
-ufw firewall to allow SSH, HTTP, and HTTPS traffic.
-🎉 Completion
+## 🔧 Additional Configurations
+- The script also configures:
+  - `ufw` firewall to allow SSH, HTTP, and HTTPS traffic.
+
+## 🎉 Completion
 Congratulations! 🎊 Your email setup is now complete. Reboot your system, and you're good to go!
 
-Acknowledgment:
-Special thanks to Derek Sivers for the inspiration. Check out Derek Sivers' website for more insights.
+**Acknowledgment:**
+Special thanks to Derek Sivers for the inspiration. Check out [Derek Sivers' website](https://sive.rs) for more insights.
 
 Feel free to reach out if you encounter any issues. Happy emailing! 📬✨
