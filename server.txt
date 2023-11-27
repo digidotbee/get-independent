@@ -1,0 +1,180 @@
+#!/bin/bash
+
+# Function to get user input and save it to a file
+get_user_input() {
+    local file="$1"
+    if [ -f "$file" ]; then
+        cat "$file"
+    else
+        read -p "Enter: " ui
+        ui=$(tr -d '[:space:]' <<< "$ui")
+        echo "$ui" > "$file"
+        cat "$file"
+    fi
+}
+
+# Function to perform initial setup
+initial_setup() {
+    if [ ! -x "$(command -v curl)" ]; then
+        echo "Updating..."
+        sudo apt-get update
+        sudo apt-get upgrade -y
+        # Install needed software
+        sudo apt-get install -y curl rsync radicale links mutt dovecot
+    fi
+}
+
+# Function to download config files
+download_config_files() {
+    files=("pf.conf" "httpd.conf" "relayd.conf" "acme-client.conf" ".muttrc" ".mailcap" "smtpd.conf" "dovecot.conf" "hello.txt" "hello.pdf" "derek.jpg" "guitar.mp3" "ymap.mp4")
+
+    for file in "${files[@]}"; do
+        if [ ! -f "$file" ]; then
+            wget "https://sive.rs/file/$file"
+        fi
+    done
+
+    if [ -f pf.conf ]; then
+        sudo mv pf.conf /etc/pf.conf
+        sudo pfctl -f /etc/pf.conf
+    fi
+}
+
+# Function to get domain name
+get_domain_name() {
+    local domain_file="/root/my/domain"
+    if [ -f "$domain_file" ]; then
+        cat "$domain_file"
+    else
+        read -p "Your domain name? " ui
+        domain=$(tr -d '[:space:]' <<< "$ui" | tr '[:upper:]' '[:lower:]' | sed 's/^www\.//')
+        echo "$domain" > "$domain_file"
+        echo "$domain"
+    fi
+}
+
+# Function to get username
+get_username() {
+    local user_file="/root/my/user"
+    if [ -f "$user_file" ]; then
+        cat "$user_file"
+    else
+        read -p "Your user name? (one lowercase word, no spaces): " ui
+        user=$(tr -d '[:space:]' <<< "$ui" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]//g')
+        echo "$user" > "$user_file"
+        echo "$user"
+    fi
+}
+
+# Function to check if email and login are correct
+check_email_and_login() {
+    local user_file_ok="/root/my/userok"
+    if [ ! -f "$user_file_ok" ]; then
+        echo "Email and login will be $user@$domain"
+        read -p "Does that look right? (y/n) " ui
+        yn=$(tr -d '[:space:]' <<< "$ui" | tr '[:upper:]' '[:lower:]' | cut -c1-1)
+        if [ "$yn" != "y" ]; then
+            rm "$user_file" "$domain_file"
+            echo "Please run this script again."
+            exit 1
+        fi
+        touch "$user_file_ok"
+    fi
+}
+
+# Rest of the functions...
+
+# Main script
+if [ "$(id -u)" -ne 0 ] || [ "$(uname)" != "Linux" ]; then
+    echo "Must be run as root on Linux"
+    exit 1
+fi
+
+# INITIAL SETUP
+initial_setup
+
+# DOWNLOAD CONFIG FILES
+download_config_files
+
+# DOMAIN?
+domain=$(get_domain_name)
+
+# USERNAME?
+user=$(get_username)
+
+# DOMAIN AND USER OK?
+check_email_and_login
+
+# Function to configure mutt
+configure_mutt() {
+    local muttrc_file=".muttrc"
+    if [ -f "$muttrc_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$muttrc_file"
+    fi
+}
+
+# Function to configure dovecot
+configure_dovecot() {
+    local dovecot_file="dovecot.conf"
+    if [ -f "$dovecot_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$dovecot_file"
+    fi
+}
+
+# Function to configure acme-client
+configure_acme_client() {
+    local acme_client_file="acme-client.conf"
+    if [ -f "$acme_client_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$acme_client_file"
+        sed -i "s/YOURDOMAIN/$domain/g" "$acme_client_file"
+    fi
+}
+
+# Function to configure relayd
+configure_relayd() {
+    local relayd_file="relayd.conf"
+    if [ -f "$relayd_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$relayd_file"
+        sed -i "s/YOURDOMAIN/$domain/g" "$relayd_file"
+    fi
+}
+
+# Function to configure httpd
+configure_httpd() {
+    local httpd_file="httpd.conf"
+    if [ -f "$httpd_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$httpd_file"
+        sed -i "s/YOURDOMAIN/$domain/g" "$httpd_file"
+    fi
+}
+
+# Function to configure pf
+configure_pf() {
+    local pf_file="pf.conf"
+    if [ -f "$pf_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$pf_file"
+        sed -i "s/YOURDOMAIN/$domain/g" "$pf_file"
+    fi
+}
+
+# Function to configure smtpd
+configure_smtpd() {
+    local smtpd_file="smtpd.conf"
+    if [ -f "$smtpd_file" ]; then
+        sed -i "s/YOURNAME/$user/g" "$smtpd_file"
+        sed -i "s/YOURDOMAIN/$domain/g" "$smtpd_file"
+    fi
+}
+
+# Configure applications
+configure_mutt
+configure_dovecot
+configure_acme_client
+configure_relayd
+configure_httpd
+configure_pf
+configure_smtpd
+
+# Display completion message
+echo "Installation and configuration completed successfully!"
+echo "Reboot your system to apply changes."
