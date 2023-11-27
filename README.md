@@ -1,4 +1,4 @@
-# 📧 Ubuntu Email Configuration Script
+# 📧 Ubuntu Server Configuration Script
 
 This script simplifies the setup of a secure server with email configuration using an Ubuntu system. It's inspired by [Derek Sivers' script](https://sive.rs/ti) and relies on a refactored version of a script he wrote for OpenBSD operating systems. Let's get your server up and running independently!
 
