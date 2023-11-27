@@ -154,15 +154,6 @@ configure_ufw() {
     sudo ufw enable    # Enable the firewall
 }
 
-# Function to configure smtpd
-configure_smtpd() {
-    local smtpd_file="smtpd.conf"
-    if [ -f "$smtpd_file" ]; then
-        sed -i "s/YOURNAME/$user/g" "$smtpd_file"
-        sed -i "s/YOURDOMAIN/$domain/g" "$smtpd_file"
-    fi
-}
-
 # Configure applications
 configure_mutt
 configure_dovecot
