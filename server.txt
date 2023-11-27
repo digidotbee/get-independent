@@ -26,7 +26,7 @@ initial_setup() {
 
 # Function to download config files
 download_config_files() {
-    files=("pf.conf" "httpd.conf" "relayd.conf" "acme-client.conf" ".muttrc" ".mailcap" "smtpd.conf" "dovecot.conf" "hello.txt" "hello.pdf" "derek.jpg" "guitar.mp3" "ymap.mp4")
+    files=("httpd.conf" "relayd.conf" "acme-client.conf" ".muttrc" ".mailcap" "dovecot.conf")
 
     for file in "${files[@]}"; do
         if [ ! -f "$file" ]; then
