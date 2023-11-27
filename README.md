@@ -1,6 +1,6 @@
 # 📧 Ubuntu Email Configuration Script
 
-This script simplifies the setup of email-related services on your Ubuntu system. It's inspired by [Derek Sivers' script](https://sive.rs/ti). Let's get your email up and running effortlessly!
+This script simplifies the setup of a secure server with email configuration using an Ubuntu system. It's inspired by [Derek Sivers' script](https://sive.rs/ti) and relies on a refactored version of a script he wrote for OpenBSD operating systems. Let's get your server up and running independently!
 
 ## 🚀 Quick Start
 
@@ -54,6 +54,6 @@ The script will download the following configuration files:
 Congratulations! 🎊 Your email setup is now complete. Reboot your system, and you're good to go!
 
 **Acknowledgment:**
-Special thanks to Derek Sivers for the inspiration. Check out [Derek Sivers' website](https://sive.rs) for more insights.
+Special thanks to Derek Sivers for this. Check out [Derek Sivers' website](https://sive.rs) for more insights.
 
-Feel free to reach out if you encounter any issues. Happy emailing! 📬✨
+Enjoy owning and controlling your own data! 📬✨
