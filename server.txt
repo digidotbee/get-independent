@@ -82,8 +82,6 @@ check_email_and_login() {
     fi
 }
 
-# Rest of the functions...
-
 # Main script
 if [ "$(id -u)" -ne 0 ] || [ "$(uname)" != "Linux" ]; then
     echo "Must be run as root on Linux"
@@ -148,13 +146,12 @@ configure_httpd() {
     fi
 }
 
-# Function to configure pf
-configure_pf() {
-    local pf_file="pf.conf"
-    if [ -f "$pf_file" ]; then
-        sed -i "s/YOURNAME/$user/g" "$pf_file"
-        sed -i "s/YOURDOMAIN/$domain/g" "$pf_file"
-    fi
+# Function to configure ufw
+configure_ufw() {
+    sudo ufw allow 22  # Allow SSH
+    sudo ufw allow 80  # Allow HTTP
+    sudo ufw allow 443 # Allow HTTPS
+    sudo ufw enable    # Enable the firewall
 }
 
 # Function to configure smtpd
