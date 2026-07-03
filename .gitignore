@@ -1,0 +1,13 @@
+*.log
+*.tmp
+*.bak
+*.swp
+.env
+*.pem
+*.key
+*.crt
+*.csr
+*.pid
+*.retry
+coverage/
+dist/
