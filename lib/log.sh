@@ -8,8 +8,14 @@
 readonly _GI_LOG_LOADED=1
 
 # Log file location. Can be overridden before sourcing.
-GI_LOG_FILE="${GI_LOG_FILE:-/tmp/get-independent.log}"
-
+# Root logs to /var/log; regular users get a per-user file in /tmp.
+if [[ -z "${GI_LOG_FILE:-}" ]]; then
+    if [[ "$(id -u)" -eq 0 ]]; then
+        GI_LOG_FILE="/var/log/get-independent.log"
+    else
+        GI_LOG_FILE="/tmp/get-independent-$(id -un).log"
+    fi
+fi
 _log() {
     local level="$1"
     shift
@@ -17,7 +23,7 @@ _log() {
     timestamp="$(date '+%Y-%m-%d %H:%M:%S')"
     local line="[${timestamp}] [${level}] $*"
     echo "${line}"
-    echo "${line}" >> "${GI_LOG_FILE}" || true
+    echo "${line}" >> "${GI_LOG_FILE}" 2>/dev/null || true
 }
 
 log_info()  { _log "INFO " "$@"; }
