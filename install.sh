@@ -12,6 +12,7 @@ readonly GI_ROOT
 # Load libraries.
 source "${GI_ROOT}/lib/log.sh"
 source "${GI_ROOT}/lib/validate.sh"
+source "${GI_ROOT}/lib/pkg.sh"
 
 main() {
     log_info "Get Independent installer starting"
@@ -24,7 +25,10 @@ main() {
     validate_commands curl openssl systemctl apt-get
 
     log_info "All pre-flight checks passed."
-    log_info "Nothing further to do yet — installation phases arrive in future versions."
+    log_info "Phase 1: installing foundation packages..."
+    pkg_update_index
+    pkg_ensure curl git ufw fail2ban unattended-upgrades
+    log_info "Phase 1 complete."
 }
 
 main "$@"
