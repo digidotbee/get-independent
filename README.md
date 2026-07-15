@@ -8,21 +8,7 @@ This project is inspired by Derek Sivers' philosophy of digital independence, bu
 
 ---
 
-# Philosophy
-
-The modern internet encourages dependence on platforms that own your data, identity, and communications.
-
-Get Independent takes a different approach.
-
-Your domain.
-
-Your server.
-
-Your email.
-
-Your data.
-
-Your rules.
+# Hi Kids 🖐️
 
 Rather than assembling dozens of tutorials from across the internet, this project provides a curated, reproducible installation process that follows security best practices while remaining understandable and maintainable.
 
@@ -56,7 +42,7 @@ When complete, this project will automatically configure a fresh Ubuntu server w
 * Sensible default configurations
 * Repeatable deployments
 
-Every component will be configurable while providing secure defaults for new users.
+Every component will be configurable while providing secure defaults for new users. It should serve as a simple & fun introduction to linux, self hosting and bash scripting.
 
 ---
 
@@ -179,73 +165,17 @@ This project follows several engineering principles:
 ├── docs/
 └── LICENSE
 ```
-
-As the project grows, functionality will be divided into small, focused modules instead of one large installation script.
-
 ---
 
 # Project Status
 
 **Current Status:** Early Development
 
-This repository is undergoing a complete redesign.
+This repository is undergoing a complete redesign with LucasNumbrs.
 
-The original repository was an experimental adaptation of an OpenBSD-based setup script. The current project is replacing that implementation with Ubuntu-native automation, improved architecture, comprehensive validation, and production-oriented engineering practices.
+The original repository was an experimental adaptation of an OpenBSD-based setup script by Derek Svrs. The current project is replacing that implementation with Ubuntu-native automation, improved architecture, comprehensive validation, and production-oriented engineering practices.
 
 Until the first stable release is published, interfaces and implementation details may change significantly.
-
----
-
-# Contributing
-
-Contributions are welcome.
-
-Areas where help is especially appreciated include:
-
-* Ubuntu server administration
-* Email infrastructure
-* Security hardening
-* Bash engineering
-* Documentation
-* Automated testing
-* CI/CD
-* IPv6 support
-* DNS best practices
-
-Please open an issue before beginning large architectural changes so implementation efforts can be coordinated.
-
----
-
-# Roadmap
-
-## Phase 1
-
-* Core installer framework
-* Configuration engine
-* Logging
-* Validation
-* Package management
-
-## Phase 2
-
-* Email services
-* TLS automation
-* Firewall
-* Secure defaults
-
-## Phase 3
-
-* Testing
-* Health checks
-* Upgrade path
-* Backup system
-
-## Phase 4
-
-* Multi-domain support
-* Monitoring
-* Optional web dashboard
-* Plugin architecture
 
 ---
 
@@ -257,7 +187,7 @@ This project is released under the MIT License.
 
 ## Mission
 
-Digital independence should not require a systems administration degree.
+Digital independence should not require a systems administration degree. It should be something a mom can do with her kids once they are ready and able to put words on a command line.
 
 Get Independent exists to make self-hosting approachable without sacrificing security, reliability, or transparency.
 
